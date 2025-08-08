@@ -99,5 +99,34 @@ CREATE TABLE HistoricoLeitura(
     Aluno_id INT,
     data_inicio DATE,
     data_fim DATE,
-    FOREIGN KEY (Aluno_id) REFERENCES Aluno
-)
+    FOREIGN KEY (Aluno_id) REFERENCES Aluno(id)
+    FOREIGN KEY (livro_id) Reserva Livro(id)
+);
+
+--tabelo sugestão
+CREATE TABLE sugestao(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(150),
+    autor VARCHAR(100),
+    Categoria VARCHAR(50),
+    justificativa TEXT,
+    data_sugestao DATE,
+    alino_id INT
+    professor_id INT,
+    FOREIGN KEY (Aluno_id) REFERENCES Aluno(id),
+    FOREIGN KEY (professor_id) REFERENCES professor(id)
+);
+--tabela Relatorio
+CREATE TABLE Relatorio(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo ENUM('mensal, 'turma', 'aluno','livro'),
+    periodo_inicio DATE,
+    periodo_fim DATE,
+    geriodo_por_bibliotecario INT,
+    gerado_por_diretor INT,
+    gerado_por_supervisor INT,
+    FOREIGN KEY (gerado_por_bibliotecario) REFERENCES Bibliotecario(id),
+    FOREIGN KEY (gerado_por_direito) REFERENCES Diretor(id),
+    FOREIGN KEY (gerado_por_Supervisor) REFERENCES Supervisor(id)
+);
+
