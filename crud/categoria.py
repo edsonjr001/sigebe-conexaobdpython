@@ -49,6 +49,21 @@ def deletar_categoria(id_categoria):
         return{"status":"sucesso","mensagem":"Categoria excluida!"}
     except Exception as e:
         return{"status":"erro","mensagem":str(e)}
-    finally            
-    comm.close()
-    
+    finally:            
+            try: conn.close()
+            except: pass
+
+def atualiza_livro(id_livro, titulo, autor, isbn, sinopse, capa, quatidade, categoria_id):
+    try:
+        conn = conectar()
+        cursor = conn.cursor()
+        cursor.execute(
+        "UPDATE Livro SET  titulo=%s, autor=%s, isbn=%s, sinopse=%s, capa=%s, quatidade=%s, categoria_id=%s WHERE id=%s",
+        (titulo, autor, isbn, sinopse, capa, quatidade, categoria_id, id_livro)
+    )
+    conn.commit()   
+    if cursor.rowcount==0:
+        return {"status":"aviso", "mensagem":"Nenhum livro encontrado para atualizar."}
+    return {"status":"sucesso","mensagem":"Livro atuazalizado com sucesso. "} 
+  except Exception as e:
+    return {"status":"erro",}  
