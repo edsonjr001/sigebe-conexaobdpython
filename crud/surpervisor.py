@@ -10,8 +10,11 @@ def criar_surpervisor(nome,email,senha,status='ativo'):
         conn.commit(); return {"status":"sucesso","mensagem":"surpervisor" "criado.","id":cursor.lastrowid}
     except Exception as e: return {"status":"erro","mensagem":str(e)}
     finally:
-        try: conn.close()
-        except: pass
+         if conn is not None:
+            try:
+                conn.close()
+            except Exception as e:
+                print(f"Erro ao fechar conexão: {e}")    
 
 def listar_surpervisor():
     try:
@@ -20,8 +23,11 @@ def listar_surpervisor():
         return cursor.fetchall()
     except Exception as e: return {"status":"erro","mensagem":str(e)}
     finally:
-        try: conn.close()
-        except: pass
+        if conn is not None:
+            try:
+                conn.close()
+            except Exception as e:
+                print(f"Erro ao fechar conexão: {e}")    
 
 def atualizar_surpervisor(id_d,nome=None,email=None,senha=None,status=None):
     try:
@@ -39,8 +45,11 @@ def atualizar_surpervisor(id_d,nome=None,email=None,senha=None,status=None):
         return {"status":"sucesso","mensagem":" atualizado."}
     except Exception as e: return {"status":"erro","mensagem":str(e)}
     finally:
-        try: conn.close()
-        except: pass
+          if conn is not None:
+            try:
+                conn.close()
+            except Exception as e:
+                print(f"Erro ao fechar conexão: {e}")    
 
 def deletar_diretor(id_s):
     try:
@@ -51,5 +60,8 @@ def deletar_diretor(id_s):
         return {"status":"sucesso","mensagem":"Diretor excluído."}
     except Exception as e: return {"status":"erro","mensagem":str(e)}
     finally:
-        try: conn.close()
-        except: pass
+        if conn is not None:
+            try:
+                conn.close()
+            except Exception as e:
+                print(f"Erro ao fechar conexão: {e}")    

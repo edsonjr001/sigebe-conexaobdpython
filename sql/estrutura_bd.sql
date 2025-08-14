@@ -17,7 +17,7 @@ CREATE TABLE livro (
     isbn VARCHAR(20) NOT NULL,
     sinopse TEXT,
     capa TEXT,
-    quantidade INT DEFAULT 1,
+    quantidade INT DEFAULT 1
     Categoria_id INT,
     FOREIGN KEY (categoria_id) REFERENCES Categoria(id)
 );
