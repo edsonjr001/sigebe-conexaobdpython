@@ -79,3 +79,4 @@ def deletar_livro(id_livro):
     finally:
         try: conn.close()
         except: pass
+

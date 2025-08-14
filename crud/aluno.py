@@ -66,4 +66,31 @@ def atualizar_aluno(id_aluno, email=None, senha=None, serie=None, status=None):
         if status is not None:
             campos.append("status=%s"); valores.append(status)
         if not campos:
-            return {"status":"aviso","mensagem":}        
+            return {"status":"aviso","mensagem":"Nada para atualizar ."} 
+        sqt = "UPDATE Aluno SET "+",".join(campos) + "WHERE id=%s"
+        valores.append(id_aluno)
+        cursor.execute(sql, tuple(valores))
+        conn.commit()
+        if cursor.rowcount==0:
+            return {"status":"aviso","mensagem":"Aluno não encontrado para atualizar."}
+        return {"status":"sucesso","mensagem":"Aluno"  "atualizar."}    
+    except Exception as e:
+        return {"status":"erro","mensagem":str(e)}
+    finally:
+        try: conn.close()
+        except:pass
+
+def deletar_aluno(id_aluno):
+    try:
+        conn = conectar()
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM Aluno WHERE id%s",(id_aluno,))
+        conn.commit()
+        if cursor.rowcount==0:
+            return {"status":"aviso","mensagem":"Aluno não encontrado."}
+        return {"status":"sucesso","mensagem":"Aluno excluido."}
+    except Exception as e:
+        return {"status":"erro","mensagem":str(e)}
+    finally:
+        try: conn.close()
+        except: pass                                         
