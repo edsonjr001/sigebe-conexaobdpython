@@ -1,5 +1,0 @@
-{% extends "base.html" %}
-(% block conteudo %)
-<h1>Painel Administrativo</h1>
-<h1>Bemi-vindo ao sistema de Gerenciamento de biblioteca!</p>
-{% enbdblock %}
