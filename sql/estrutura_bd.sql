@@ -119,7 +119,7 @@ CREATE TABLE sugestao(
 --tabela Relatorio
 CREATE TABLE Relatorio(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    tipo ENUM('mensal, 'turma', 'aluno','livro'),
+    tipo ENUM('mensal', 'turma', 'aluno','livro'),
     periodo_inicio DATE,
     periodo_fim DATE,
     geriodo_por_bibliotecario INT,
