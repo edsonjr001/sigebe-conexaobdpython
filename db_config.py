@@ -1,20 +1,15 @@
-# db_config.py
+import os
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask
 
-import mysql.connector
-from mysql.connector import Error
+# Caminho absoluto do arquivo do banco
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DB_PATH = os.path.join(BASE_DIR, "sgb.db")
 
-def conectar():
-    try:
-        conexao = mysql.connector.connect(
-            host='127.0.0.1',
-            port='3306',
-            use="root",      #Troque se necessário 
-            password='eec123456@#$', # Troque se necessário
-            database='sgb'  # Nome do seu banco
-        )
-        if conexao.is_connected():
-            print("Conexão bem-sucedida com o banco de dados!")
-            return conexao
-    except Error as e:
-        print(f"Erro ao conectar ao banco de dados: {e}")
-        return None
+db = SQLAlchemy()
+
+def init_app(app: Flask):
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_PATH}"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    db.init_app(app)
+    return app
